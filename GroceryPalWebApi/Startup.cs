@@ -26,6 +26,7 @@ namespace GroceryPalWebApi
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
+                c.EnableAnnotations();
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GroceryPalWebApi", Version = "v1" });
             });
 
@@ -56,7 +57,7 @@ namespace GroceryPalWebApi
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GroceryPalWebApi v1"));
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             
             app.UseRouting();
             app.UseCors("CorsPolicy");

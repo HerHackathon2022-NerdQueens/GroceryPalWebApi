@@ -14,7 +14,7 @@ namespace GroceryPalWebApi.Model
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductTag> ProductTags { get; set; }
-        public DbSet<Receipe> Receipes { get; set; }
+        public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<ShoppingList> ShoppingLists { get; set; }
         public DbSet<ShoppingListItem> ShoppingListItems { get; set; }
@@ -56,7 +56,7 @@ namespace GroceryPalWebApi.Model
                 .OnDelete(DeleteBehavior.Restrict);
             });
 
-            modelBuilder.Entity<Receipe>(entity =>
+            modelBuilder.Entity<Recipe>(entity =>
             {
                 entity.HasKey(x => x.Id);
             });
@@ -76,7 +76,7 @@ namespace GroceryPalWebApi.Model
                 .OnDelete(DeleteBehavior.Restrict);
             });
 
-            modelBuilder.Entity<Receipe>(entity =>
+            modelBuilder.Entity<Recipe>(entity =>
             {
                 entity.HasKey(x => x.Id);
             });

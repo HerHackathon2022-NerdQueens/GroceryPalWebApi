@@ -14,23 +14,23 @@ namespace GroceryPalWebApi.Controllers
     [ApiController]
     [Route("[controller]")]
     [EnableCors("CorsPolicy")]
-    public class CategoryController : ControllerBase
+    public class TagController : ControllerBase
     {
         private readonly GroceryPalContext _context;
         private readonly IMapper _mapper;
 
-        public CategoryController(GroceryPalContext context, IMapper mapper)
+        public TagController(GroceryPalContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        [SwaggerOperation(Summary = "Get all categories")]
+        [SwaggerOperation(Summary = "Get all tags")]
         [HttpGet]
-        public async Task<ActionResult<List<CategoryDTO>>> GetCategoriesAsync()
+        public async Task<ActionResult<List<TagDTO>>> GetTagsAsync()
         {
-            var categories = await _context.Categories.Select(c => _mapper.Map<CategoryDTO>(c)).ToListAsync();
-            return Ok(categories);
+            var tags = await _context.Tags.Select(c => _mapper.Map<TagDTO>(c)).ToListAsync();
+            return Ok(tags);
         }
     }
 }
