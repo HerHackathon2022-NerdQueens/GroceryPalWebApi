@@ -16,6 +16,9 @@ namespace GroceryPalWebApi.Mapping
                 .ForMember(dest => dest.ProductTags, opt => opt.MapFrom(a => a.ProductTags.Select(t => t.Tag).ToList()));
             CreateMap<ShoppingList, ShoppingListDTO>();
             CreateMap<ShoppingListItem, ShoppingListItemDTO>();
+            CreateMap<Recipe, RecipeDTO>();
+            CreateMap<Ingredient, IngredientDTO>();
+
         }
     }
 }

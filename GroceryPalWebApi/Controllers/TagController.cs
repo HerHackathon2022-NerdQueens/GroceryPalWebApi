@@ -4,6 +4,7 @@ using GroceryPalWebApi.Model;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace GroceryPalWebApi.Controllers
             _mapper = mapper;
         }
 
+        [SwaggerOperation(Summary = "Get all tags")]
         [HttpGet]
         public async Task<ActionResult<List<TagDTO>>> GetTagsAsync()
         {

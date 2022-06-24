@@ -99,3 +99,5 @@ D:\HerHackathon\GroceryPalWebApi\GroceryPalWebApi\bin\Debug\net5.0\Microsoft.Ext
 D:\HerHackathon\GroceryPalWebApi\GroceryPalWebApi\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
 D:\HerHackathon\GroceryPalWebApi\GroceryPalWebApi\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
 D:\HerHackathon\GroceryPalWebApi\GroceryPalWebApi\bin\Debug\net5.0\products.json
+D:\HerHackathon\GroceryPalWebApi\GroceryPalWebApi\bin\Debug\net5.0\productsSimplier.json
+D:\HerHackathon\GroceryPalWebApi\GroceryPalWebApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.Annotations.dll

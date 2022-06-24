@@ -26,6 +26,7 @@ namespace GroceryPalWebApi
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
+                c.EnableAnnotations();
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GroceryPalWebApi", Version = "v1" });
             });
 

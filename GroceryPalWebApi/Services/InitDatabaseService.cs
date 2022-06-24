@@ -64,6 +64,9 @@ namespace GroceryPalWebApi.Services
                 var category30 = new Category { CategoryName = "Frz. Cabs" };
                 var category31 = new Category { CategoryName = "Milk Chiller" };
                 var category32 = new Category { CategoryName = "Dairy Chiller" };
+                var category33 = new Category { CategoryName = "Nuts" };
+                var category34 = new Category { CategoryName = "Snacks" };
+                var category35 = new Category { CategoryName = "Spices" };
 
                 _context.Categories.Add(category1);
                 _context.Categories.Add(category2);
@@ -97,6 +100,9 @@ namespace GroceryPalWebApi.Services
                 _context.Categories.Add(category30);
                 _context.Categories.Add(category31);
                 _context.Categories.Add(category32);
+                _context.Categories.Add(category33);
+                _context.Categories.Add(category34);
+                _context.Categories.Add(category35);
                 #endregion
 
                 #region AddTags

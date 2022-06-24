@@ -2,11 +2,11 @@
 
 namespace GroceryPalWebApi.Model
 {
-    public class Receipe
+    public class Recipe
     {
         public int Id { get; set; }
-        public string ReceipeName { get; set; }
-        public string Description { get; set; }
+        public string RecipeName { get; set; }
+        public string Instructions { get; set; }
 
         public List<Ingredient> Ingredients { get; set; }
     }

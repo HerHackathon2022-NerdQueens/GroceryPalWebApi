@@ -4,6 +4,7 @@ using GroceryPalWebApi.Model;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,6 +24,7 @@ namespace GroceryPalWebApi.Controllers
             _mapper = mapper;
         }
 
+        [SwaggerOperation(Summary = "Get all products from shopping list")]
         [HttpGet]
         public async Task<ActionResult<ShoppingListDTO>> GetShoppingListAsync()
         {
@@ -39,6 +41,7 @@ namespace GroceryPalWebApi.Controllers
             return Ok(shoppingListDTO);
         }
 
+        [SwaggerOperation(Summary = "Add one product to shopping list")]
         [HttpPost("{productId}")]
         public async Task<ActionResult> AddProductAsync([FromRoute] int productId)
         {
@@ -66,7 +69,7 @@ namespace GroceryPalWebApi.Controllers
             return Ok();
         }
 
-
+        [SwaggerOperation(Summary = "Remove one product from shopping list")]
         [HttpDelete("{productId}")]
         public async Task<ActionResult> DeleteProductAsync([FromRoute] int productId)
         {
@@ -84,6 +87,43 @@ namespace GroceryPalWebApi.Controllers
 
             await _context.SaveChangesAsync();
 
+            return Ok();
+        }
+
+        [SwaggerOperation(Summary = "Add ingredients from recipe to shopping list")]
+        [HttpPost("IngredientsFromRecipe/{recipeId}")]
+        public async Task<ActionResult> AddIngredientsFromRecipeAsync([FromRoute] int recipeId)
+        {
+            var recipe = await _context.Recipes
+                .Include(r => r.Ingredients)
+                .ThenInclude(i => i.Product)
+                .Where(r => r.Id == recipeId)
+                .FirstOrDefaultAsync();
+            if (recipe == null)
+                return BadRequest("Invalid recipeId");
+
+            var shoppingList = await _context.ShoppingLists.Include(l => l.ShoppingListItems).FirstOrDefaultAsync();
+
+            foreach (var ingredient in recipe.Ingredients)
+            {
+                var shoppingListItem = shoppingList.ShoppingListItems.Where(i => i.ProductId == ingredient.Product.Id).FirstOrDefault();
+                if (shoppingListItem == null)
+                {
+                    var product = await _context.Products.Where(p => p.Id == ingredient.Product.Id).FirstOrDefaultAsync();
+
+                    shoppingList.ShoppingListItems.Add(new ShoppingListItem
+                    {
+                        Product = product,
+                        Amount = ingredient.Amount
+                    });
+                }
+                else
+                {
+                    shoppingListItem.Amount += ingredient.Amount;
+                }
+            }
+
+            await _context.SaveChangesAsync();
             return Ok();
         }
     }
