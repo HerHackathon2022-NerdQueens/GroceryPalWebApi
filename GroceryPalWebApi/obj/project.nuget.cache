@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7qWxwdgh7rMPdJRLjOCopFyj6gdj9JqL5wWVY1WjXHlmsVHIu51ZOZ9sAvsndeslzTl8WwhO+80qu6uNmGaQ4g==",
+  "dgSpecHash": "v0bW0Uf6T65yBWY4S3k5eEgzf43pghO6Jvh4+2iWmQyo1X3bqw+diKz4Dr30P6xXdXW6zWrP2x6kR9Bd5uHnfg==",
   "success": true,
   "projectFilePath": "D:\\HerHackathon\\GroceryPalWebApi\\GroceryPalWebApi\\GroceryPalWebApi.csproj",
   "expectedPackageFiles": [
@@ -28,6 +28,7 @@
     "C:\\Users\\djkri\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\6.7.1\\microsoft.identitymodel.protocols.openidconnect.6.7.1.nupkg.sha512",
     "C:\\Users\\djkri\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.7.1\\microsoft.identitymodel.tokens.6.7.1.nupkg.sha512",
     "C:\\Users\\djkri\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\djkri\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.10.9\\microsoft.visualstudio.azure.containers.tools.targets.1.10.9.nupkg.sha512",
     "C:\\Users\\djkri\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
     "C:\\Users\\djkri\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
     "C:\\Users\\djkri\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",

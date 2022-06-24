@@ -1,0 +1,63 @@
+[
+  {
+    "Id": 1000,
+    "ProductName": "3-Klingenrasierermen",
+    "Brand": "Cien",
+    "CategoryId": 2,
+    "Tags": [],
+    "Pack": "1 Stk.",
+    "Price": 2.99,
+    "Eans": "4638137504847,7496236943779"
+  },
+  {
+    "Id": 1001,
+    "ProductName": "5-KlingenrasiererMenShark5",
+    "Brand": "Cien",
+    "CategoryId": 2,
+    "Tags": [],
+    "Pack": "1 Stk.",
+    "Price": 3.89,
+    "category": "",
+    "Eans": "2940305640601,9691082187065"
+  },
+  {
+    "Id": 1002,
+    "ProductName": "Anti-SchuppenShampoo,sortiert",
+    "Brand": "Cien",
+    "CategoryId": 2,
+    "Tags": [],
+    "Pack": "300 ml",
+    "Price": 0.95,
+    "Eans": "5687697097411,4736801326594"
+  },
+  {
+    "Id": 1003,
+    "ProductName": "BabyFeuchttücher,sortiert",
+    "Brand": "Lupilu",
+    "CategoryId": 9,
+    "Tags": [],
+    "Pack": "80 Blatt",
+    "Price": 0.99,
+    "Eans": "5519045068401,8984274028033"
+  },
+  {
+    "Id": 1004,
+    "ProductName": "Baby-FeuchttücherXXL,sortiert",
+    "Brand": "Lupilu",
+    "CategoryId": 9,
+    "Tags": [],
+    "Pack": "320 Blatt",
+    "Price": 3.95,
+    "Eans": "7818965068811,4534077514635"
+  },
+  {
+    "Id": 1005,
+    "ProductName": "CremeDusche,sortiert",
+    "Brand": "Cien",
+    "CategoryId": 2,
+    "Tags": [],
+    "Pack": "300 ml",
+    "Price": 0.55,
+    "Eans": "9558697947432,3445999497016"
+  }
+]
