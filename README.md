@@ -1,6 +1,6 @@
-GroceryPal Web API
+# GroceryPal Web API
 
-###### Usage:
+## Usage:
 Docker pull command for Web API
 ```
 docker pull tinadj/grocerypalwebapi
