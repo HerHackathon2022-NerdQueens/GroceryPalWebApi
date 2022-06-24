@@ -126,5 +126,13 @@ namespace GroceryPalWebApi.Controllers
             await _context.SaveChangesAsync();
             return Ok();
         }
+
+        [SwaggerOperation(Summary = "TODO: Finds optimal route through the store based on the shopping list")]
+        [HttpPost("FindOptimalRoute")]
+        public async Task<ActionResult> FindOptimalRouteAsync()
+        {
+            // TODO: 
+            return Ok();
+        }
     }
 }
