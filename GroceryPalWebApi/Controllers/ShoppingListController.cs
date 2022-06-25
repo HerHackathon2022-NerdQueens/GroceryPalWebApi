@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
+using GroceryPalWebApi.Code;
 using GroceryPalWebApi.DTO;
 using GroceryPalWebApi.Model;
+using GroceryPalWebApi.Services;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -127,12 +130,55 @@ namespace GroceryPalWebApi.Controllers
             return Ok();
         }
 
-        [SwaggerOperation(Summary = "TODO: Finds optimal route through the store based on the shopping list")]
+        [SwaggerOperation(Summary = "Finds optimal route through the store based on the shopping list")]
         [HttpPost("FindOptimalRoute")]
-        public async Task<ActionResult> FindOptimalRouteAsync()
+        public async Task<ActionResult<List<RouteItemDTO>>> FindOptimalRouteAsync()
         {
-            // TODO: 
-            return Ok();
+            var shoppingList = await _context.ShoppingLists
+                .Include(l => l.ShoppingListItems)
+                .ThenInclude(i => i.Product)
+                .ThenInclude(p => p.Category)
+                .Include(s => s.Store)
+                .FirstOrDefaultAsync();
+
+            
+            if (!shoppingList.ShoppingListItems.Any())
+                return Ok(new List<RouteItemDTO>());
+            
+
+            shoppingList.Store = UtilService.InitStoreLayoutAndDistanceMatrix(shoppingList.Store);
+
+            // creating subgraph for TSP
+            var categories = shoppingList.ShoppingListItems.Select(i => i.Product.Category).ToList();
+            var categoriesIds = categories.Select(c => c.Id - 1).Distinct().ToList();
+
+            var subgraph = new int[categoriesIds.Count, categoriesIds.Count];
+
+            for (int i = 0; i < categoriesIds.Count; i++)
+            {
+                for (int j = 0; j < categoriesIds.Count; j++)
+                {
+                    subgraph[i, j] = shoppingList.Store.DistanceMatrix[categoriesIds[i], categoriesIds[j]];
+                }
+            }
+ 
+            var routeOrderList = TravelingSalesmanProblem.Run(categoriesIds.Count, subgraph, 0);
+            var result = new List<RouteItemDTO>();
+
+            for (int i = 0; i < routeOrderList.Count; i++)
+            {
+                var category = categories[routeOrderList[i]];
+                var routeOrder = new RouteItemDTO
+                {
+                    OrderId = i + 1,
+                    CategoryName = category.CategoryName,
+                    ProductsToPick = shoppingList.ShoppingListItems.Where(i => i.Product.CategoryId == category.Id).Select(i => _mapper.Map<ProductDTO>(i.Product)).ToList()
+                };
+                result.Add(routeOrder);
+            }
+
+            // returnign result
+            return Ok(result);
         }
     }
 }

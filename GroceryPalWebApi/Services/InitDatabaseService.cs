@@ -1,6 +1,8 @@
-﻿using GroceryPalWebApi.Model;
+﻿using GroceryPalWebApi.Code;
+using GroceryPalWebApi.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,10 +27,7 @@ namespace GroceryPalWebApi.Services
             {
                 var _context = scope.ServiceProvider.GetRequiredService<GroceryPalContext>();
 
-                var shoppingList = new ShoppingList
-                {
-                    ShoppingListItems = new List<ShoppingListItem>()
-                };
+                var shoppingList = new ShoppingList { ShoppingListItems = new List<ShoppingListItem>() };
                 _context.ShoppingLists.Add(shoppingList);
 
                 #region AddCategories
@@ -77,6 +76,7 @@ namespace GroceryPalWebApi.Services
                 _context.Categories.Add(category7);
                 _context.Categories.Add(category8);
                 _context.Categories.Add(category9);
+                /*
                 _context.Categories.Add(category10);
                 _context.Categories.Add(category11);
                 _context.Categories.Add(category12);
@@ -103,6 +103,7 @@ namespace GroceryPalWebApi.Services
                 _context.Categories.Add(category33);
                 _context.Categories.Add(category34);
                 _context.Categories.Add(category35);
+                */
                 #endregion
 
                 #region AddTags
@@ -129,20 +130,62 @@ namespace GroceryPalWebApi.Services
                 string jsonString = File.ReadAllText(fileName);
                 var products = JsonSerializer.Deserialize<List<Product>>(jsonString)!;
 
+                var rnd = new Random();
+                var categories = _context.Categories.ToList();
+
                 foreach (var product in products)
                 {
-                    var category = _context.Categories.Where(p => p.Id == product.CategoryId).FirstOrDefault();
+                    // Random selection of category only for MOCKING purpose 
+                    // (to match with the store layout matrix)
+                    var i = rnd.Next(0, categories.Count-1);
+                    var category = categories[i]; 
                     product.Category = category;
+                    
+                    //var category = _context.Categories.Where(p => p.Id == product.CategoryId).FirstOrDefault();
                 }
 
                 _context.Products.AddRange(products);
                 #endregion
 
                 #region AddReceipes
+
+                var recipe1 = new Recipe
+                {
+                    RecipeName = "Test Recipe 1",
+                    Instructions = "Step 1, Step 2, Step 3, Step 4",
+                    Ingredients = new List<Ingredient>
+                    {
+                        new Ingredient { ProductId = 1383, Amount = 1 }, new Ingredient { ProductId = 1483, Amount = 2}
+                    }
+                };
+                var recipe2 = new Recipe
+                {
+                    RecipeName = "Test Recipe 2",
+                    Instructions = "Step 1, Step 2, Step 3, Step 4",
+                    Ingredients = new List<Ingredient>
+                    {
+                        new Ingredient { ProductId = 1484, Amount = 1 }, new Ingredient { ProductId = 1779, Amount = 1 }, new Ingredient { ProductId = 1858, Amount = 1 } 
+                    }
+                };
+
+                _context.Add(recipe1);
+                _context.Add(recipe2);
+
                 #endregion
 
+                #region AddStore
 
-                await _context.SaveChangesAsync();
+                var store = new Store
+                {
+                    StoreName = "Lidl #1",
+                    ShoppingList = shoppingList
+
+                };
+
+                _context.Stores.Add(store);
+                #endregion
+
+                await _context.SaveChangesAsync(cancellationToken);
             }
         }
 

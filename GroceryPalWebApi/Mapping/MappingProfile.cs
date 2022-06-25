@@ -18,6 +18,7 @@ namespace GroceryPalWebApi.Mapping
             CreateMap<ShoppingListItem, ShoppingListItemDTO>();
             CreateMap<Recipe, RecipeDTO>();
             CreateMap<Ingredient, IngredientDTO>();
+            CreateMap<Store, StoreDTO>();
 
         }
     }
