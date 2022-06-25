@@ -165,6 +165,7 @@ namespace GroceryPalWebApi.Controllers
             var routeOrderList = TravelingSalesmanProblem.Run(categoriesIds.Count, subgraph, 0);
             var result = new List<RouteItemDTO>();
 
+            // returning result
             for (int i = 0; i < routeOrderList.Count; i++)
             {
                 var category = categories[routeOrderList[i]];
@@ -177,7 +178,6 @@ namespace GroceryPalWebApi.Controllers
                 result.Add(routeOrder);
             }
 
-            // returnign result
             return Ok(result);
         }
     }
