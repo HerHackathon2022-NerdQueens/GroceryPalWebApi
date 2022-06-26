@@ -44,9 +44,9 @@ namespace GroceryPalWebApi.Controllers
             var recipe = await _context.Recipes
                 .Include(r => r.Ingredients)
                 .ThenInclude(i => i.Product)
-                .ThenInclude(p => p.Category)
-                .Select(r => _mapper.Map<RecipeDTO>(r))
+                .ThenInclude(p => p.Category)        
                 .Where(r => r.Id == recipeId)
+                .Select(r => _mapper.Map<RecipeDTO>(r))
                 .FirstOrDefaultAsync();
             if (recipe == null)
                 return NotFound("Invalid recipeId");
